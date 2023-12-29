@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  
+  
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background-color: #1F1F1F;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+body {
+  @apply h-[100vh] w-[100vw] p-0 m-0 overflow-x-hidden
+}
+
+h1{
+  font-family: 'Lobster Two', sans-serif;
+}
+
+li, .custom-color {
+  @apply cursor-pointer hover:text-[#DCFFC2]
+}
+
+.project {
+  @apply  hover:bg-gray-600 hover:bg-opacity-10 rounded-md p-3 md:p-6 grid place-content-between gap-4 
+}
+
+.project a {
+  @apply text-sm lg:text-gray-300 text-[#DCFFC2]
+}
+.project:hover a{
+@apply text-[#DCFFC2]
+}
+
+
