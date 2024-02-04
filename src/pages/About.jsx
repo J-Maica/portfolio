@@ -3,6 +3,8 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 import "react-vertical-timeline-component/style.min.css";
 import HTML from "../assets/html.webp";
 import CSS from "../assets/css.webp";
@@ -16,6 +18,23 @@ import Figma from "../assets/figma.webp";
 import Canva from "../assets/canva.webp";
 import PS from "../assets/photoshop.webp";
 function About() {
+  const [certificates, setCertificates] = useState([]);
+
+  const certURL = import.meta.env.VITE_URL_CERT;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get(certURL);
+        setCertificates(response.data);
+      } catch (error) {
+        console.error("Error fetching certificates:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="grid gap-20 lg:gap-28" id="about">
       {/*Education  */}
@@ -264,6 +283,34 @@ function About() {
               </div>
             </VerticalTimelineElement>
           </VerticalTimeline>
+        </div>
+      </div>
+
+      {/* Certificate */}
+      <div className="grid gap-6">
+        <h2 className="text-start xl:text-center xl:tracking-wide font-medium text-lg md:text-xl">
+          Certificates
+        </h2>
+        <div className="grid grid-cols-3 grid-md-cols-2 place-items-center gap-4">
+          {certificates.map((cert, key) => {
+            return (
+              <div key={key}>
+                <a
+                  href={cert?.image || "preview"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LazyLoadImage
+                    src={cert?.image || "certificate image"}
+                    alt={cert?.name || "certificate image"}
+                    onClick={cert?.image}
+                    loading="lazy"
+                    effect="blur"
+                  />
+                </a>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
